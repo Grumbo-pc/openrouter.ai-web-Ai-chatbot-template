@@ -3,7 +3,7 @@ An AI chatbot template for openrouter.ai that runs completely on HTML and Javasc
 <br>
 (youtube video of how to setup coming soon)
 <br>
-Open the HTML file in your IDE of choice i use VS code <br>
+Open the HTML file in your IDE of choice I use VS code <br>
 Optional: change the styling to your liking <br>
 Change the names and branding <br>
 Go to https://openrouter.ai/ and sign up and get an API Key <br>
