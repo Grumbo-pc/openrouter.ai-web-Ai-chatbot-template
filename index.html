@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Template</title>
+  <style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(to bottom right, #f5f5f5, #e0e0e0);
+  font-family: 'Segoe UI', sans-serif;
+  color: #222;
+  display: flex;
+  flex-direction: column;
+}
+
+#page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+header {
+  text-align: center;
+  padding: 30px 20px 10px;
+  font-size: 2em;
+  font-weight: bold;
+  color: #444;
+  text-shadow: 1px 1px #fff;
+}
+
+#main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+#chat-container {
+  flex: 1;
+  min-height: 0;
+  width: 100%;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  padding: 20px;
+  overflow-y: auto;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+}
+
+#bubble-scroll {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#chat-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+#chat-container::-webkit-scrollbar-track {
+  background: transparent;
+  margin: 10px 0;
+  border-radius: 20px;
+}
+
+#chat-container::-webkit-scrollbar-thumb {
+  background-color: #bdbdbd;
+  border-radius: 20px;
+  border: 2px solid #fff;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.08);
+}
+
+.bubble {
+  display: inline-block;
+  padding: 12px 16px;
+  border-radius: 20px;
+  word-wrap: break-word;
+  max-width: 80%;
+  width: fit-content;
+  position: relative;
+  margin: 10px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.bubble.user {
+  background: linear-gradient(to right, #eeeeee, #f5f5f5);
+  margin-left: auto;
+  margin-right: 10px;
+  text-align: right;
+  align-self: flex-end;
+  border: 1px solid #bdbdbd;
+}
+
+.bubble.bot {
+  background: linear-gradient(to right, #e0e0e0, #fafafa);
+  margin-right: auto;
+  margin-left: 10px;
+  text-align: left;
+  align-self: flex-start;
+  border: 1px solid #bdbdbd;
+}
+
+#input-container {
+  width: 100%;
+  max-width: 600px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+#user-input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  box-sizing: border-box;
+  transition: border 0.3s ease;
+  background: #fafafa;
+  color: #222;
+}
+
+#user-input:focus {
+  border: 1px solid #888;
+  outline: none;
+  box-shadow: 0 0 5px rgba(120, 120, 120, 0.2);
+}
+
+footer {
+  text-align: center;
+  font-size: 0.8em;
+  color: #888;
+  padding: 10px;
+  background: transparent;
+}
+
+.typing-dots::after {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  text-align: left;
+  animation: dots 1.2s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0%   { content: ''; }
+  33%  { content: '.'; }
+  66%  { content: '..'; }
+  100% { content: '...'; }
+}
+
+.typing-dots {
+  font-weight: bold;
+  color: #888;
+  margin-left: 5px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+#send-btn {
+  width: 40px;
+  height: 40px;
+  background: #bdbdbd;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 10px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  transition: transform 0.2s ease;
+}
+
+#send-btn:hover {
+  transform: scale(1.1);
+  background: #888;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: none;
+  opacity: 0;
+  pointer-events: none;
+}
+@keyframes float {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 0; }
+}
+  </style>
+</head>
+<body>
+  <div id="page">
+    <header>TM6 Zone</header>
+
+    <div id="main-content">
+      <div id="chat-container">
+        <div id="bubble-scroll">
+          <div class="bubble bot">Hey there! I'm (insert AI name), your virtual assistant</div>
+        </div>
+      </div>
+
+<div id="input-container">
+  <input type="text" id="user-input" placeholder="Type your message..." />
+  <button id="send-btn">✨</button>
+</div>
+
+
+    
+
+    <footer>
+      This is a template code needs to be modified. Responses are fictional and for entertainment only.
+    </footer>
+  </div>
+
+<script>
+  const bubbleScroll = document.getElementById('bubble-scroll');
+  const userInput = document.getElementById('user-input');
+  const sendBtn = document.getElementById('send-btn');
+
+  const API_URL = "https://openrouter.ai/api/v1/chat/completions";
+  const API_KEY = "(insert API KEY)"; //change it to the api key
+  const MODEL = "google/gemma-3n-e2b-it:free"; //could be changed to any model from https://openrouter.ai/models i had pre-set this as i found it the best for my use case
+
+  const systemPrompt = "..." //replace with the prompt of what you want your ai to talk about, mimic or be useful with
+
+  //formating text as per the recived text from the API
+
+  function formatMessage(text) {
+    return text
+      .replace(/(\*\*)(.*?)\1/g, '<strong>$2</strong>')         // **bold**
+      .replace(/(\*)(.*?)\1/g, '<strong>$2</strong>')           // *bold*
+      .replace(/(_)(.*?)\1/g, '<em>$2</em>')                    // _italic_
+      .replace(/(`)(.*?)\1/g, '<code>$2</code>')                // `code`
+      .replace(/~~(.*?)~~/g, '<del>$1</del>');                  // ~~strikethrough~~
+  }
+
+  async function sendToSABGPT(userText) {
+    const combinedPrompt = `${systemPrompt}\n\nUser: ${userText}`;
+    try {
+      const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${API_KEY}`,
+          "HTTP-Referer": "http://localhost",
+          "X-Title": "Sab-GPT"
+        },
+        body: JSON.stringify({
+          model: MODEL,
+          messages: [{ role: "user", content: combinedPrompt }]
+        })
+      });
+
+      if (!response.ok) {
+        console.error("Sab-GPT API Error:", response.status, response.statusText);
+        const errorText = await response.text();
+        console.error("API Response Body:", errorText);
+        throw new Error("API request failed");
+      }
+
+      const data = await response.json();
+      return data.choices[0].message.content;
+
+    } catch (error) {
+      console.error("Sab-GPT Fetch Error:", error);
+      throw error;
+    }
+  }
+
+  async function handleUserMessage(userText) {
+    const userBubble = document.createElement("div");
+    userBubble.className = "bubble user";
+    userBubble.textContent = userText;
+    bubbleScroll.appendChild(userBubble);
+
+    const botBubble = document.createElement("div");
+    botBubble.className = "bubble bot";
+    botBubble.innerHTML = `<span>✨ (Replace with AI name) is thinking<span class="typing-dots"></span></span>`;
+    bubbleScroll.appendChild(botBubble);
+
+    bubbleScroll.scrollTop = bubbleScroll.scrollHeight;
+
+    try {
+      const reply = await sendToSABGPT(userText);
+      botBubble.innerHTML = formatMessage(reply);
+    } catch (error) {
+      botBubble.textContent = "Oops! Something went wrong.";
+    }
+
+    bubbleScroll.scrollTop = bubbleScroll.scrollHeight;
+  }
+
+  userInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter" && userInput.value.trim() !== "") {
+      const userText = userInput.value.trim();
+      userInput.value = "";
+      handleUserMessage(userText);
+    }
+  });
+
+  sendBtn.addEventListener("click", () => {
+    const userText = userInput.value.trim();
+    if (userText !== "") {
+      userInput.value = "";
+      handleUserMessage(userText);
+    }
+  });
+</script>
+
+
+</body>
+</html>
