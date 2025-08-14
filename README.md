@@ -1,7 +1,7 @@
 # openrouter.ai-web-Ai-chatbot-template
 An AI chatbot template for openrouter.ai that runs completely on HTML and Javascript and embedded complexly in one HTML file so it is great for hosting on static website hosts such as github pages
 <br>
-(youtube video of how to setup coming soon)
+[![Watch on YouTube](https://img.youtube.com/vi/uplpUcR8ZAY/0.jpg)](https://www.youtube.com/watch?v=uplpUcR8ZAY)
 <br>
 Open the HTML file in your IDE of choice I use VS code <br>
 Optional: change the styling to your liking <br>
